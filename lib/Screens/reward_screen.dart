@@ -27,7 +27,6 @@ class _RewardScreenState extends State<RewardScreen> {
       'description': "Cash voucher\n500 points"
     },
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +42,15 @@ class _RewardScreenState extends State<RewardScreen> {
         ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 430,
             height:259 ,
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            // padding: const EdgeInsets.symmetric(vertical: 20),
             color: Colors.green[100], 
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Total Points",
                     style: TextStyle(fontSize: 14, color: Colors.black54,)),
@@ -59,7 +59,7 @@ class _RewardScreenState extends State<RewardScreen> {
                   "2,4375", 
                   style: TextStyle(
                     
-                    fontSize: 32,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
                   ),
@@ -101,7 +101,7 @@ class _RewardScreenState extends State<RewardScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(reward['icon'], size: 40, color: Colors.green),
                         const SizedBox(height: 8),
