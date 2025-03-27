@@ -56,13 +56,13 @@
 //     return [];
 //   }
 
-  
 // }
-
 
 import 'dart:convert';
 import 'package:app_coures/models/activity_model.dart';
+import 'package:app_coures/models/history_model.dart';
 import 'package:app_coures/models/points_model.dart';
+import 'package:app_coures/models/reward_model.dart';
 import 'package:app_coures/models/user_model.dart';
 import 'package:app_coures/services/storage_service.dart';
 import 'package:http/http.dart' as http;
@@ -101,8 +101,9 @@ class ApiService {
   // Fetch activities
   Future<List<Activity>> fetchActivities({int limit = 20}) async {
     try {
-      // final token = await _storageService.getToken(); // Retrieve token
-      final token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
+      final token = await _storageService.getToken(); // Retrieve token
+      // final token =
+      //     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
 
       if (token == null) {
         throw Exception('Token not found');
@@ -128,15 +129,15 @@ class ApiService {
   // Fetch points
   Future<Points?> fetchPoints() async {
     try {
-      // final token = await _storageService.getToken(); // Retrieve token
-      final token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
+      final token = await _storageService.getToken(); // Retrieve token
+      // final token =
+      //     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
       if (token == null) {
-        
         throw Exception('Token not found');
       }
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/account/points'), 
+        Uri.parse('$baseUrl/api/account/points'),
         headers: {'Authorization': 'Bearer $token'},
       );
       if (response.statusCode == 200) {
@@ -150,41 +151,129 @@ class ApiService {
     }
   }
 
-Future<List<User>> fetchProfile() async {
-  try {
-    // Replace with actual token retrieval method
-      final token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
-
-    if (token.isEmpty) {
+  Future<void> cancelPickup(int pickupId) async {
+    final token = await _storageService.getToken(); // Retrieve token
+    if (token == null) {
       throw Exception('Token not found');
     }
 
-    final response = await http.get(
-      Uri.parse('$baseUrl/api/account/user'), // Updated endpoint for user profile
-      headers: {'Authorization': 'Bearer $token'},
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/pickup/cancel/$pickupId'),
+      headers: {'Authorization': 'Bearer $token'}, // Use token
     );
 
- 
     if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-            print("------------ ${jsonResponse}");
-
-
-      if (jsonResponse is List) {
-        // Response is a list of users
-        return jsonResponse.map((json) => User.fromJson(json)).toList();
-      } else if (jsonResponse is Map<String, dynamic>) {
-        // Response is a single user object
-        return [User.fromJson(jsonResponse)];
-      } else {
-        throw Exception('Unexpected data format received');
-      }
+      print('Pickup successfully canceled');
     } else {
-      throw Exception('Failed to load users: ${response.statusCode}');
+      throw Exception('Failed to cancel pickup: ${response.body}');
     }
-  } catch (e) {
-    print('Error fetching profile: $e');
-    return [];
   }
-}
+
+  Future<List<User>> fetchProfile() async {
+    try {
+      // Replace with actual token retrieval method
+      final token =
+          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0Mjg2MTgxNCwiZXhwIjoxNzQzNDY2NjE0LCJpYXQiOjE3NDI4NjE4MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.9B2y1oUDaaWoOc3FsAvIOdTvYqwu1uNcrRuYifpLjVld4Xqq8tzQFCZWsoO1OI6oYadshv-CW6mLSDJ_qgDvKg";
+
+      if (token.isEmpty) {
+        throw Exception('Token not found');
+      }
+
+      final response = await http.get(
+        Uri.parse(
+          '$baseUrl/api/account/user',
+        ), // Updated endpoint for user profile
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        print("------------ ${jsonResponse}");
+
+        if (jsonResponse is List) {
+          // Response is a list of users
+          return jsonResponse.map((json) => User.fromJson(json)).toList();
+        } else if (jsonResponse is Map<String, dynamic>) {
+          // Response is a single user object
+          return [User.fromJson(jsonResponse)];
+        } else {
+          throw Exception('Unexpected data format received');
+        }
+      } else {
+        throw Exception('Failed to load users: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching profile: $e');
+      return [];
+    }
+  }
+
+  Future<List<RewardOption>> fetchRewardOptions() async {
+    try {
+      final token =
+          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0MzA0NzIxMSwiZXhwIjoxNzQzNjUyMDExLCJpYXQiOjE3NDMwNDcyMTEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.KrwUWT2Aw56skuxzx79WOZKDPpKwvpCDm6Cu_2u_NIG2yaCVUm6m-BuCjrzkMdV6H_zwlQ4mO9vOwkYAwFuI8A"; // Replace with actual token retrieval method
+
+      if (token.isEmpty) {
+        throw Exception('Token not found');
+      }
+
+      final response = await http.get(
+        Uri.parse(
+          '$baseUrl/api/reward/listReward',
+        ), // Update with correct API endpoint
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        print("API Response: $jsonResponse");
+
+        if (jsonResponse is List) {
+          return jsonResponse
+              .map((json) => RewardOption.fromJson(json))
+              .toList();
+        } else {
+          throw Exception('Unexpected data format received');
+        }
+      } else {
+        throw Exception(
+          'Failed to load reward options: ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      print('Error fetching reward options: $e');
+      return [];
+    }
+  }
+  Future<List<Pickup>> fetchPickups() async {
+    try {
+final token =
+          "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvcGhlYWtAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNvcGhlYWsiLCJzdWIiOiJhNjM0ZDBiMy02YzIzLTQ4ZGEtOTdhNy01ZTU4MTIxYzYyN2YiLCJpZCI6ImE2MzRkMGIzLTZjMjMtNDhkYS05N2E3LTVlNTgxMjFjNjI3ZiIsIm5iZiI6MTc0MzA0NzIxMSwiZXhwIjoxNzQzNjUyMDExLCJpYXQiOjE3NDMwNDcyMTEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI0NiJ9.KrwUWT2Aw56skuxzx79WOZKDPpKwvpCDm6Cu_2u_NIG2yaCVUm6m-BuCjrzkMdV6H_zwlQ4mO9vOwkYAwFuI8A"; // Replace with actual token retrieval method
+
+      if (token.isEmpty) {
+        throw Exception('Token not found');
+      }
+
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/pickup/history'), // Update with correct API endpoint
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        print("API Response: $jsonResponse");
+
+        if (jsonResponse is List) {
+          return jsonResponse.map((json) => Pickup.fromJson(json)).toList();
+        } else {
+          throw Exception('Unexpected data format received');
+        }
+      } else {
+        throw Exception('Failed to load pickups: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching pickups: $e');
+      return [];
+    }
+  }
 }

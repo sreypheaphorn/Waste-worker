@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
         _firstNameController.text = user.userName;
         _lastNameController.text = user.userName;
         _emailController.text = user.email;
-        _phoneController.text = '012345678';
+        _phoneController.text = '0713583551';
         _addressController.text = 'Phnom Penh, Cambodia';
       }
       return users;
@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: const CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('assets/images/profile.png'),
+                backgroundImage: AssetImage('assets/icon/Rectangle 3.png'),
               ),
             ),
             const SizedBox(height: 16),
