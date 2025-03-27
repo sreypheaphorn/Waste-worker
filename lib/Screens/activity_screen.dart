@@ -62,7 +62,6 @@ class ActivityScreen extends StatefulWidget {
 class _ActivityScreenState extends State<ActivityScreen> {
   final ActivityController _activityController = ActivityController();
   late Future<List<Activity>> _activities;
-
   @override
   void initState() {
     super.initState();

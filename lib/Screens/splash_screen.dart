@@ -91,6 +91,7 @@
 //   }
 // }
 
+import 'package:app_coures/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -102,15 +103,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: WasteToWealthScreen(),
-    );
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()), // Navigate to login
+      );
+    });
   }
-}
 
-class WasteToWealthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
