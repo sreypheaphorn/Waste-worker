@@ -61,11 +61,13 @@
 
 
 import 'dart:convert';
+import 'package:app_coures/Screens/schedule_pickup.dart';
 import 'package:app_coures/models/activity_model.dart';
 import 'package:app_coures/models/points_model.dart';
 import 'package:app_coures/models/user_model.dart';
 import 'package:app_coures/services/storage_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:app_coures/models/schedule_pickup.dart';
 
 class ApiService {
   static const String baseUrl = 'https://pay1.jetdev.life';
@@ -187,4 +189,26 @@ Future<List<User>> fetchProfile() async {
     return [];
   }
 }
+ Future<void> addPickup(PickupRequest pickup) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/pickup/schedule'), // API endpoint for posting data
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_API_TOKEN', // Replace with your actual API token
+        },
+        body: json.encode(pickup.toJson()), // Convert the SchedulePickup model to JSON
+      );
+
+      // Check if the response was successful
+      if (response.statusCode == 200) {
+        print("Pickup scheduled successfully");
+      } else {
+        // Handle response error
+        print("Failed to schedule pickup: ${response.statusCode}");
+      }
+    } catch (e) {
+      print('Error during HTTP request: $e'); // Handle network or other errors
+    }
+  }
 }

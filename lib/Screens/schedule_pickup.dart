@@ -1,6 +1,9 @@
+import 'dart:convert'; // Import this for JSON encoding
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart'; // Import TableCalendar
-import 'package:fluttertoast/fluttertoast.dart'; // Import Fluttertoast
+import 'package:table_calendar/table_calendar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../models/schedule_pickup.dart'; // Import the PickupRequest model
+import '../controllers/schedule_pickup.dart'; // Import the PickupController
 
 class SchedulePickup extends StatefulWidget {
   const SchedulePickup({super.key});
@@ -14,12 +17,14 @@ class _SchedulePickupState extends State<SchedulePickup> {
   TimeOfDay selectedTime = TimeOfDay.now();
   List<String> selectedWasteTypes = [];
   bool isRecurringEnabled = false;
+  String? estimatedWeight;
+
+  final PickupController pickupController = PickupController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("")),
-      // Wrap the Column in a SingleChildScrollView to make it scrollable
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -56,7 +61,7 @@ class _SchedulePickupState extends State<SchedulePickup> {
               ),
             ),
             SizedBox(height: 20),
-            // Time selection added here (with "Enter Time" label)
+            // Time selection
             Container(
               padding: EdgeInsets.only(left: 25, right: 25),
               child: Column(
@@ -116,22 +121,7 @@ class _SchedulePickupState extends State<SchedulePickup> {
               ),
             ),
             SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.only(left: 25),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Waste Type',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            // First row of waste types
+            // Waste type buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -141,7 +131,6 @@ class _SchedulePickupState extends State<SchedulePickup> {
               ],
             ),
             SizedBox(height: 10),
-            // Second row of waste types
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -170,14 +159,18 @@ class _SchedulePickupState extends State<SchedulePickup> {
                     ),
                     style: TextStyle(fontSize: 16),
                     textAlignVertical: TextAlignVertical.center,
+                    onChanged: (value) {
+                      setState(() {
+                        estimatedWeight = value;
+                      });
+                    },
                   ),
                 ],
               ),
             ),
-            
-            // Left-aligned recurring pickup toggle without border
+            // Recurring pickup switch
             Container(
-              padding: const EdgeInsets.only(left: 25, right: 25,top:2, bottom: 5),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 2, bottom: 5),
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
@@ -204,7 +197,7 @@ class _SchedulePickupState extends State<SchedulePickup> {
                 ],
               ),
             ),
-
+            // Schedule button
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(12),
@@ -212,12 +205,29 @@ class _SchedulePickupState extends State<SchedulePickup> {
                 width: 380,
                 height: 35,
                 child: ElevatedButton(
-                  onPressed: () => Fluttertoast.showToast(
-                    msg: isRecurringEnabled 
-                        ? "Recurring Pickup Scheduled for ${today.toString().substring(0, 10)} at ${selectedTime.format(context)}" 
-                        : "One-time Pickup Scheduled for ${today.toString().substring(0, 10)} at ${selectedTime.format(context)}",
-                    fontSize: 18,
-                  ),
+                  onPressed: () {
+                    final pickupRequest = PickupRequest(
+                      pickupDate: today,
+                      pickupTime: selectedTime.format(context),
+                      wasteTypes: selectedWasteTypes,
+                      isRecurring: isRecurringEnabled,
+                      estimatedWeight: estimatedWeight,
+                    );
+
+                    // Convert the pickupRequest to JSON and print it to the console
+                    final jsonData = jsonEncode({
+                      'pickupDate': pickupRequest.pickupDate.toIso8601String(),
+                      'pickupTime': pickupRequest.pickupTime,
+                      'wasteTypes': pickupRequest.wasteTypes,
+                      'isRecurring': pickupRequest.isRecurring,
+                      'estimatedWeight': pickupRequest.estimatedWeight,
+                    });
+
+                    print(jsonData); // Log the JSON data in the console
+
+                    // Now, you can also call your pickupController if needed
+                    pickupController.schedulePickup(pickupRequest);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     shape: RoundedRectangleBorder(
@@ -232,8 +242,6 @@ class _SchedulePickupState extends State<SchedulePickup> {
                 ),
               ),
             ),
-            
-            // SizedBox(height: 10),
           ],
         ),
       ),
