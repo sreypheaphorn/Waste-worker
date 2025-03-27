@@ -1,10 +1,16 @@
 
 import 'package:app_coures/Screens/home_screen.dart';
+import 'package:app_coures/Screens/login_screen.dart';
+import 'package:app_coures/Screens/naviget_screen.dart';
+import 'package:app_coures/Screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:app_coures/Screens/splash_screen.dart';
 // import 'package:app_coures/Screens/reward_screen.dart';
 // import 'package:app_coures/Screens/register_screen.dart';
 import 'package:app_coures/Screens/home_screen.dart';
+// import 'package:app_coures/Screens/login_screen.dart';
+// import 'Screens/history_screen.dart';
+import 'package:app_coures/Screens/activity_screen.dart';
 
 
 void main() {
@@ -19,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home:  SchedulePickup(),
+      home:MainScreen(),
 
     );
   }
