@@ -18,12 +18,15 @@
 //         elevation: 0,
 //         title: Row(
 //           children: [
-//             Image.asset('assets/icon/Rectangle 3.png', width: 20, height: 20),
+//             CircleAvatar(
+//               backgroundImage: AssetImage('assets/icon/profile.jpg'),
+//               radius: 16,
+//             ),
 //             const SizedBox(width: 10),
 //             const Text(
 //               'JayyJenn!',
 //               style: TextStyle(
-//                 color: Color.fromARGB(255, 29, 151, 13),
+//                 color: Color(0xFF1D970D),
 //                 fontWeight: FontWeight.bold,
 //                 fontSize: 22,
 //               ),
@@ -37,23 +40,454 @@
 //           ),
 //         ],
 //       ),
-//       body: Container(
-//         padding: EdgeInsets.all(16.0),
-//         child: LineChartWithTable(),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: SingleChildScrollView(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               _buildTotalPointsCard(),
+//               const SizedBox(height: 20),
+//               _buildGetStartedSection(),
+//               const SizedBox(height: 20),
+//               _buildRecentActivitySection(),
+//             ],
+//           ),
+//         ),
 //       ),
+//       bottomNavigationBar: _buildBottomNavBar(),
 //     );
 //   }
 // }
 
-// class LineChartWithTable extends StatelessWidget {
-//   const LineChartWithTable({super.key});
+// // Widget _buildTotalPointsCard() {
+// //   return Container(
+// //     padding: const EdgeInsets.all(16),
+// //     decoration: BoxDecoration(
+// //       border: Border.all(color: Colors.green),
+// //       borderRadius: BorderRadius.circular(12),
+// //     ),
+// //     child: Column(
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         // Line Chart
+// //         SizedBox(
+// //           height: 300, // Adjust height as needed
+// //           child: LineChart(
+// //             LineChartData(
+// //               gridData: const FlGridData(show: true),
+// //               titlesData: FlTitlesData(show: true),
+// //               borderData: FlBorderData(show: true),
+// //               minX: 0,
+// //               maxX: 4,
+// //               minY: 0,
+// //               maxY: 5,
+// //               lineBarsData: [
+// //                 LineChartBarData(
+// //                   spots: const [
+// //                     FlSpot(0, 1),
+// //                     FlSpot(1, 3),
+// //                     FlSpot(2, 1.5),
+// //                     FlSpot(3, 4),
+// //                     FlSpot(4, 2),
+// //                   ],
+// //                   isCurved: true,
+// //                   color: const Color.fromARGB(255, 65, 218, 98),
+// //                   dotData: const FlDotData(show: false),
+// //                   belowBarData: BarAreaData(
+// //                     show: true,
+// //                     color: const Color.fromARGB(
+// //                       255,
+// //                       52,
+// //                       217,
+// //                       88,
+// //                     ).withOpacity(0.3),
+// //                   ),
+// //                 ),
+// //               ],
+// //             ),
+// //           ),
+// //         ),
+// //       ],
+// //     ),
+// //   );
+// // }
+// Widget _buildTotalPointsCard() {
+//   return Container(
+//     padding: const EdgeInsets.all(16),
+//     decoration: BoxDecoration(
+//       border: Border.all(color: Colors.green),
+//       borderRadius: BorderRadius.circular(12),
+//     ),
+//     child: Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         // Title Text
+//         Text(
+//           "Totals Points",
+//           style: TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.green,
+//           ),
+//         ),
+//         Text(
+//           "2,4375",
+//           style: TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.green,
+//           ),
+//         ),
+//         Text(
+//           "\$124.65", // Corrected the comma to a period
+//           style: TextStyle(
+//             fontSize: 12,
+//             fontWeight: FontWeight.bold,
+//             color: const Color.fromARGB(255, 108, 118, 108),
+//           ),
+//         ),
+//         SizedBox(height: 8), // Space between text and chart
+//         // Line Chart
+//         SizedBox(
+//           height: 300, // Adjust height as needed
+//           child: LineChart(
+//             LineChartData(
+//               gridData: const FlGridData(show: true),
+//               titlesData: FlTitlesData(show: true),
+//               borderData: FlBorderData(show: true),
+//               minX: 0,
+//               maxX: 4,
+//               minY: 0,
+//               maxY: 5,
+//               lineBarsData: [
+//                 LineChartBarData(
+//                   spots: const [
+//                     FlSpot(0, 1),
+//                     FlSpot(1, 3),
+//                     FlSpot(2, 1.5),
+//                     FlSpot(3, 4),
+//                     FlSpot(4, 2),
+//                   ],
+//                   isCurved: true,
+//                   color: const Color.fromARGB(255, 65, 218, 98),
+//                   dotData: const FlDotData(show: false),
+//                   belowBarData: BarAreaData(
+//                     show: true,
+//                     color: const Color.fromARGB(
+//                       255,
+//                       52,
+//                       217,
+//                       88,
+//                     ).withOpacity(0.3),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
+
+// Widget _buildGetStartedSection() {
+//   return Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       const Text(
+//         "Get Started",
+//         style: TextStyle(
+//           fontSize: 22,
+//           fontWeight: FontWeight.bold,
+//           color: Colors.green,
+//         ),
+//       ),
+//       const SizedBox(height: 10),
+//       _buildActionCard(
+//         "Schedule Pickup",
+//         "Redeem Your Points And Get Exciting Rewards!",
+//       ),
+//       const SizedBox(height: 10),
+//       _buildActionCard(
+//         "Get Your Rewards!",
+//         "Schedule A Pickup And Turn Your Waste Into Value Quick!",
+//       ),
+//     ],
+//   );
+// }
+
+// Widget _buildRecentActivitySection() {
+//   return Column(
+//     children: [
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           const Text(
+//             "Recent Activity",
+//             style: TextStyle(
+//               fontSize: 18,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.green,
+//             ),
+//           ),
+//           TextButton(
+//             onPressed: () {},
+//             child: const Text(
+//               "View All",
+//               style: TextStyle(color: Colors.green),
+//             ),
+//           ),
+//         ],
+//       ),
+//       Column(
+//         children: [
+//           Container(
+//             padding: const EdgeInsets.all(16.0),
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(12),
+//               border: Border.all(color: Colors.green),
+//               color: const Color.fromARGB(255, 201, 238, 203),
+//             ),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text(
+//                       "Plastic Collection",
+//                       style: TextStyle(
+//                         fontWeight: FontWeight.bold,
+//                         fontSize: 16,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     Text("+10 Points", style: TextStyle(color: Colors.green)),
+//                   ],
+//                 ),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+//                   children: [
+//                     Text("2.7 Kg", style: TextStyle(color: Colors.black54)),
+//                     const SizedBox(height: 4),
+//                     Text(
+//                       "\$1",
+//                       style: TextStyle(
+//                         color: Colors.green,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     ],
+//   );
+// }
+
+// Widget _buildActionCard(String title, String description) {
+//   return Card(
+//     elevation: 1,
+//     shape: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.circular(12),
+//       side: const BorderSide(color: Colors.green),
+//     ),
+//     child: ListTile(
+//       title: Text(
+//         title,
+//         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+//       ),
+//       subtitle: Text(description),
+//       trailing: const Icon(Icons.arrow_forward, color: Colors.green),
+//     ),
+//   );
+// }
+
+// Widget _buildActivityItem(
+//   String title,
+//   String points,
+//   String weightOrTime,
+//   String price,
+// ) {
+//   return Card(
+//     elevation: 1,
+//     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//     child: ListTile(
+//       leading: const Icon(Icons.recycling, color: Colors.green),
+//       title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+//       subtitle: Text(weightOrTime),
+//       trailing: Column(
+//         crossAxisAlignment: CrossAxisAlignment.end,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Text(points, style: const TextStyle(color: Colors.green)),
+//           Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
+//         ],
+//       ),
+//     ),
+//   );
+// }
+
+// Widget _buildBottomNavBar() {
+//   return BottomNavigationBar(
+//     selectedItemColor: Colors.green,
+//     unselectedItemColor: Colors.grey,
+//     items: const [
+//       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+//       BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
+//       BottomNavigationBarItem(icon: Icon(Icons.layers), label: "Social"),
+//       BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+//     ],
+//   );
+// }
+
+// import 'package:flutter/material.dart';
+// import 'package:fl_chart/fl_chart.dart';
+// import 'package:app_coures/services/api_service.dart';
+// import 'package:app_coures/models/points_model.dart'; // Assuming your model is imported correctly.
+
+// class HomeScreenPage extends StatefulWidget {
+//   const HomeScreenPage({super.key});
+
+//   @override
+//   State<HomeScreenPage> createState() => _HomeScreenPageState();
+// }
+
+// class _HomeScreenPageState extends State<HomeScreenPage> {
+//   Points? _points; // To hold the fetched points data
+//   bool _isLoading = true; // To show loading indicator
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchPoints(); // Fetch points when the page is initialized
+//   }
+
+//   // Function to fetch points from the API
+//   Future<void> _fetchPoints() async {
+//     try {
+//       final apiService = ApiService();
+//       final points = await apiService.fetchPoints();
+//       print("------------ ${points}");
+//       setState(() {
+//         _points = points; // Update the points state
+//         _isLoading = false; // Hide loading indicator once data is fetched
+//       });
+//     } catch (e) {
+//       setState(() {
+//         _isLoading = false; // Hide loading on error
+//       });
+//       print('Error fetching points: $e');
+//     }
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         backgroundColor: Colors.white,
+//         elevation: 0,
+//         title: Row(
+//           children: [
+//             CircleAvatar(
+//               backgroundImage: AssetImage('assets/icon/profile.jpg'),
+//               radius: 16,
+//             ),
+//             const SizedBox(width: 10),
+//             const Text(
+//               'JayyJenn!',
+//               style: TextStyle(
+//                 color: Color(0xFF1D970D),
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 22,
+//               ),
+//             ),
+//           ],
+//         ),
+//         actions: [
+//           IconButton(
+//             icon: const Icon(Icons.notifications_none, color: Colors.black),
+//             onPressed: () {},
+//           ),
+//         ],
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: SingleChildScrollView(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               _buildTotalPointsCard(),
+//               const SizedBox(height: 20),
+//               _buildGetStartedSection(),
+//               const SizedBox(height: 20),
+//               _buildRecentActivitySection(),
+//             ],
+//           ),
+//         ),
+//       ),
+//       // bottomNavigationBar: _buildBottomNavBar(),
+//     );
+//   }
+
+//   // Widget to build the "Total Points" section
+//   Widget _buildTotalPointsCard() {
+//     return Container(
+//       padding: const EdgeInsets.all(16),
+//       decoration: BoxDecoration(
+//         border: Border.all(color: Colors.green),
+//         borderRadius: BorderRadius.circular(12),
+//       ),
 //       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
 //         children: [
-//           // Line Chart
+//           // Title Text
+//           Text(
+//             "Total Points",
+//             style: TextStyle(
+//               fontSize: 18,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.green,
+//             ),
+//           ),
+//           // Show loading spinner while fetching points
+//           if (_isLoading)
+//             const Center(child: CircularProgressIndicator())
+//           else if (_points != null)
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   "${_points?.totalPoints}",
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.green,
+//                   ),
+//                 ),
+//                 Text(
+//                   "\$${_points?.cashEquivalent.toStringAsFixed(2)}",
+//                   style: TextStyle(
+//                     fontSize: 12,
+//                     fontWeight: FontWeight.bold,
+//                     color: const Color.fromARGB(255, 108, 118, 108),
+//                   ),
+//                 ),
+//               ],
+//             )
+//           else
+//             const Text(
+//               "No points available",
+//               style: TextStyle(fontSize: 18, color: Colors.grey),
+//             ),
+//           SizedBox(height: 8), // Space between text and chart
+//           // Line Chart (optional, can be removed or replaced)
 //           SizedBox(
 //             height: 300, // Adjust height as needed
 //             child: LineChart(
@@ -91,36 +525,179 @@
 //               ),
 //             ),
 //           ),
-
-//           const SizedBox(height: 10), // Space between chart and table
-
-//           Container(
-//             alignment: Alignment.centerLeft,
-//             padding: EdgeInsets.all(30), // Corrected padding
-//               child: Text(
-//               "Get Started",
-//               style: TextStyle(
-//                 fontSize: 20,
-//                 color: Colors.green,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ),
-//           Column(
-//             children: [
-//               Container(
-
-//               ),
-//             ],
-//           )
 //         ],
 //       ),
 //     );
 //   }
+
+//   // Widget for "Get Started" section
+//   Widget _buildGetStartedSection() {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         const Text(
+//           "Get Started",
+//           style: TextStyle(
+//             fontSize: 22,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.green,
+//           ),
+//         ),
+//         const SizedBox(height: 10),
+//         _buildActionCard(
+//           "Schedule Pickup",
+//           "Redeem Your Points And Get Exciting Rewards!",
+//         ),
+//         const SizedBox(height: 10),
+//         _buildActionCard(
+//           "Get Your Rewards!",
+//           "Schedule A Pickup And Turn Your Waste ",
+//         ),
+//       ],
+//     );
+//   }
+
+//   // Widget for "Recent Activity" section
+//   // Widget _buildRecentActivitySection() {
+//   //   return Column(
+//   //     children: [
+//   //       Row(
+//   //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//   //         children: [
+//   //           const Text(
+//   //             "Recent Activity",
+//   //             style: TextStyle(
+//   //               fontSize: 18,
+//   //               fontWeight: FontWeight.bold,
+//   //               color: Colors.green,
+//   //             ),
+//   //           ),
+//   //           TextButton(
+//   //             onPressed: () {},
+//   //             child: const Text(
+//   //               "View All",
+//   //               style: TextStyle(color: Colors.green),
+//   //             ),
+//   //           ),
+//   //         ],
+//   //       ),
+//   //       // Recent activities list goes here
+//   //     ],
+//   //   );
+
+//   // }
+//   // Widget for "Recent Activity" section
+//   Widget _buildRecentActivitySection() {
+//   return Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           const Text(
+//             "Recent Activity",
+//             style: TextStyle(
+//               fontSize: 18,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.green,
+//             ),
+//           ),
+//           TextButton(
+//             onPressed: () {},
+//             child: const Text(
+//               "View All",
+//               style: TextStyle(color: Colors.green),
+//             ),
+//           ),
+//         ],
+//       ),
+//       const SizedBox(height: 8), // Space between title and list
+//       Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//                Text(
+//                 "Plastic Collection",
+//                 style: TextStyle(
+//                   fontWeight: FontWeight.bold,
+//                   fontSize: 16,
+//                 ),
+//               ),
+//               Text("+10 Points", style: const TextStyle(color: Colors.green)),
+              
+//             ],
+//           ),
+//           const SizedBox(height: 4), // Space between rows
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               const Text("2.7 Kg", style: TextStyle(color: Colors.black54)),
+//               Text(
+//                 "\$1",
+//                 style: const TextStyle(
+//                   color: Color.fromARGB(255, 22, 224, 28),
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     ],
+//   );
 // }
 
+
+//   // Widget to create an action card
+//   Widget _buildActionCard(String title, String subtitle) {
+//     return Card(
+//       elevation: 5,
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//       child: ListTile(
+//         contentPadding: const EdgeInsets.all(16),
+//         title: Text(
+//           title,
+//           style: TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.green,
+//           ),
+//         ),
+//         subtitle: Text(
+//           subtitle,
+//           style: TextStyle(fontSize: 14, color: Colors.grey),
+//         ),
+//         trailing: Icon(Icons.arrow_forward, color: Colors.green),
+//         onTap: () {
+//           // Handle on tap action
+//         },
+//       ),
+//     );
+//   }
+  // Widget for Bottom Navigation Bar
+  // Widget _buildBottomNavBar() {
+  //   return BottomNavigationBar(
+  //     selectedItemColor: Colors.green,
+  //     unselectedItemColor: Colors.grey,
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.layers), label: "Social"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+  //     ],
+  //   );
+  // }
+// }
+
+
+import 'package:app_coures/Screens/activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:app_coures/services/api_service.dart';
+import 'package:app_coures/models/points_model.dart';
+// import 'package:app_coures/screens/activity_screen.dart'; // Ensure ActivityScreen is imported
 
 class HomeScreenPage extends StatefulWidget {
   const HomeScreenPage({super.key});
@@ -130,6 +707,31 @@ class HomeScreenPage extends StatefulWidget {
 }
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
+  Points? _points;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPoints();
+  }
+
+  Future<void> _fetchPoints() async {
+    try {
+      final apiService = ApiService();
+      final points = await apiService.fetchPoints();
+      setState(() {
+        _points = points;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      print('Error fetching points: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +741,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         elevation: 0,
         title: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage: AssetImage('assets/icon/profile.jpg'),
               radius: 16,
             ),
@@ -176,216 +778,204 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
     );
   }
-}
 
-Widget _buildTotalPointsCard() {
-  return Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.green),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Line Chart
-        SizedBox(
-          height: 300, // Adjust height as needed
-          child: LineChart(
-            LineChartData(
-              gridData: const FlGridData(show: true),
-              titlesData: FlTitlesData(show: true),
-              borderData: FlBorderData(show: true),
-              minX: 0,
-              maxX: 4,
-              minY: 0,
-              maxY: 5,
-              lineBarsData: [
-                LineChartBarData(
-                  spots: const [
-                    FlSpot(0, 1),
-                    FlSpot(1, 3),
-                    FlSpot(2, 1.5),
-                    FlSpot(3, 4),
-                    FlSpot(4, 2),
-                  ],
-                  isCurved: true,
-                  color: const Color.fromARGB(255, 65, 218, 98),
-                  dotData: const FlDotData(show: false),
-                  belowBarData: BarAreaData(
-                    show: true,
-                    color: const Color.fromARGB(
-                      255,
-                      52,
-                      217,
-                      88,
-                    ).withOpacity(0.3),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildGetStartedSection() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        "Get Started",
-        style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.green,
-        ),
+  Widget _buildTotalPointsCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.green),
+        borderRadius: BorderRadius.circular(12),
       ),
-      const SizedBox(height: 10),
-      _buildActionCard(
-        "Schedule Pickup",
-        "Redeem Your Points And Get Exciting Rewards!",
-      ),
-      const SizedBox(height: 10),
-      _buildActionCard(
-        "Get Your Rewards!",
-        "Schedule A Pickup And Turn Your Waste Into Value Quick!",
-      ),
-    ],
-  );
-}
-
-Widget _buildRecentActivitySection() {
-  return Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Recent Activity",
+            "Total Points",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.green,
             ),
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              "View All",
-              style: TextStyle(color: Colors.green),
+          if (_isLoading)
+            const Center(child: CircularProgressIndicator())
+          else if (_points != null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${_points?.totalPoints}",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                Text(
+                  "\$${_points?.cashEquivalent.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 108, 118, 108),
+                  ),
+                ),
+              ],
+            )
+          else
+            const Text(
+              "No points available",
+              style: TextStyle(fontSize: 18, color: Colors.grey),
+            ),
+          const SizedBox(height: 8),
+          SizedBox(
+            height: 300,
+            child: LineChart(
+              LineChartData(
+                gridData: const FlGridData(show: true),
+                titlesData: FlTitlesData(show: true),
+                borderData: FlBorderData(show: true),
+                minX: 0,
+                maxX: 4,
+                minY: 0,
+                maxY: 5,
+                lineBarsData: [
+                  LineChartBarData(
+                    spots: const [
+                      FlSpot(0, 1),
+                      FlSpot(1, 3),
+                      FlSpot(2, 1.5),
+                      FlSpot(3, 4),
+                      FlSpot(4, 2),
+                    ],
+                    isCurved: true,
+                    color: const Color.fromARGB(255, 65, 218, 98),
+                    dotData: const FlDotData(show: false),
+                    belowBarData: BarAreaData(
+                      show: true,
+                      color: const Color.fromARGB(255, 52, 217, 88)
+                          .withOpacity(0.3),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
-      Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green),
-                          color: const Color.fromARGB(255, 201, 238, 203),
+    );
+  }
 
-            
+  Widget _buildGetStartedSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Get Started",
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.green,
+          ),
+        ),
+        const SizedBox(height: 10),
+        _buildActionCard("Schedule Pickup", "Redeem Your Points And Get Exciting Rewards!"),
+        const SizedBox(height: 10),
+        _buildActionCard("Get Your Rewards!", "Schedule A Pickup And Turn Your Waste"),
+      ],
+    );
+  }
+
+  Widget _buildRecentActivitySection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Recent Activity",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  ActivityScreen()),
+                );
+              },
+              child: const Text(
+                "View All",
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Plastic Collection",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text("+10 Points", style: TextStyle(color: Colors.green)),
-                  ],
+                const Text(
+                  "Plastic Collection",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: [
-                    Text("2.7 Kg", style: TextStyle(color: Colors.black54)),
-                    const SizedBox(height: 4),
-                    Text(
-                      "\$1",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                const Text("+10 Points", style: TextStyle(color: Colors.green)),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("2.7 Kg", style: TextStyle(color: Colors.black54)),
+                const Text(
+                  "\$1",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 22, 224, 28),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionCard(String title, String subtitle) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.green,
           ),
-        ],
+        ),
+        subtitle: Text(
+          subtitle,
+          style: const TextStyle(fontSize: 14, color: Colors.grey),
+        ),
+        trailing: const Icon(Icons.arrow_forward, color: Colors.green),
+        onTap: () {
+          // Handle on tap action
+        },
       ),
-    ],
-  );
-}
-
-Widget _buildActionCard(String title, String description) {
-  return Card(
-    elevation: 1,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
-      side: const BorderSide(color: Colors.green),
-    ),
-    child: ListTile(
-      title: Text(
-        title,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-      ),
-      subtitle: Text(description),
-      trailing: const Icon(Icons.arrow_forward, color: Colors.green),
-    ),
-  );
-}
-
-Widget _buildActivityItem(
-  String title,
-  String points,
-  String weightOrTime,
-  String price,
-) {
-  return Card(
-    elevation: 1,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    child: ListTile(
-      leading: const Icon(Icons.recycling, color: Colors.green),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: Text(weightOrTime),
-      trailing: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(points, style: const TextStyle(color: Colors.green)),
-          Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
-      ),
-    ),
-  );
-}
-Widget _buildBottomNavBar() {
-  return BottomNavigationBar(
-    selectedItemColor: Colors.green,
-    unselectedItemColor: Colors.grey,
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
-      BottomNavigationBarItem(icon: Icon(Icons.layers), label: "Social"),
-      BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-    ],
-  );
+    );
+  }
 }
